@@ -1,2 +1,1 @@
-# Tic-tac-toe
-A Tic-tac-toe game built using React
+Tic-Tac-Toe Game
