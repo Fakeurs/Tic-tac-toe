@@ -15,17 +15,24 @@ function BoardRow({ children }) {
 export default function Board() {
   const [xIsNext, setXIsNext] = useState(true);
   const [squares, setSquares] = useState(Array(9).fill(null));
+  const [disables, setDisable] = useState(Array(9).fill(false));
+
   function handleClick(i) {
     const nextSquares = [...squares];
-    if (xIsNext) {
+    const remainingDisables = [...disables];
+    if (xIsNext && disables[i] === false) {
       nextSquares[i] = "X";
-      setSquares(nextSquares);
-      setXIsNext(false);
-    } else {
+      setXIsNext(!xIsNext);
+    } else if (!xIsNext && disables[i] === false) {
       nextSquares[i] = "O";
-      setSquares(nextSquares);
-      setXIsNext(true);
+      setXIsNext(!xIsNext);
     }
+
+    remainingDisables[i] = true;
+
+    // Update UI and play's turn
+    setSquares(nextSquares);
+    setDisable(remainingDisables);
   }
   return (
     <>
