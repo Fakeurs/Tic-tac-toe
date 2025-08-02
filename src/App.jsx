@@ -13,11 +13,19 @@ function BoardRow({ children }) {
 }
 
 export default function Board() {
+  const [xIsNext, setXIsNext] = useState(true);
   const [squares, setSquares] = useState(Array(9).fill(null));
   function handleClick(i) {
     const nextSquares = [...squares];
-    nextSquares[i] = "X";
-    setSquares(nextSquares);
+    if (xIsNext) {
+      nextSquares[i] = "X";
+      setSquares(nextSquares);
+      setXIsNext(false);
+    } else {
+      nextSquares[i] = "O";
+      setSquares(nextSquares);
+      setXIsNext(true);
+    }
   }
   return (
     <>
